@@ -27,7 +27,6 @@ class CreateUsersTable extends Migration
 
             $table->string('role')->nullable(); // 'admin', 'patient', 'doctor'
 
-
             $table->rememberToken();
             $table->timestamps();
         });
