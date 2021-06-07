@@ -13,14 +13,24 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'Rigoberto González Lomelí',
+            'name' => 'Roberto Salazar Cervantes',
             'email' => 'dev@srgorila.com',
-            'password' => bcrypt('servegame'),
-    
-            'cedula' => '12345678',
-            'address' => '',
-            'phone' => '+523121231212',
+            'password' => bcrypt('secret'),
             'role' => 'admin'
+        ]);
+
+        User::create([
+            'name' => 'Lesli Ramirez Zepeda',
+            'email' => 'patient@srgorila.com',
+            'password' => bcrypt('secret'),
+            'role' => 'patient'
+        ]);
+
+        User::create([
+            'name' => 'Alexandra Barron Carrillo',
+            'email' => 'doctor@srgorila.com',
+            'password' => bcrypt('secret'),
+            'role' => 'doctor'
         ]);
         factory(User::class, 50)->create();
     }

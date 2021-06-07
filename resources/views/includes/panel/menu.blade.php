@@ -47,7 +47,7 @@
         </li>
     @else 
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('/doctors') }}">
+            <a class="nav-link" href="{{ url('/appointments/create') }}">
                 <i class="ni ni-send text-orange"></i> Reservar cita
             </a>
         </li>

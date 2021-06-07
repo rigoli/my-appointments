@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 
 use App\Http\Controllers\Controller;
+use App\Specialty;
 
 class DoctorController extends Controller
 {
@@ -27,7 +28,8 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        return view('doctors.create'); 
+        $specialties = Specialty::all();
+        return view('doctors.create', compact('specialties')); 
     }
 
     /**
@@ -48,13 +50,15 @@ class DoctorController extends Controller
 
         $this->validate($request, $rules);
 
-        User::create(
+        $user = User::create(
             $request->only('name', 'email', 'cedula', 'address', 'phone')
             + [
                 'role' => 'doctor',
                 'password' => bcrypt($request->input('password'))
             ]
         );
+
+        $user->specialties()->attach($request->input('specialties'));
 
         $notification = 'El doctor ha registrado correctamente';
         return redirect('/doctors')->with(compact('notification'));
@@ -80,7 +84,10 @@ class DoctorController extends Controller
     public function edit($id)
     {
         $doctor = User::doctors()->findOrFail($id);
-        return view('doctors.edit', compact('doctor')); 
+        $specialties = Specialty::all();
+        $specialty_ids = $doctor->specialties()->pluck('specialties.id');
+
+        return view('doctors.edit', compact('doctor', 'specialties', 'specialty_ids')); 
     }
 
     /**
@@ -112,6 +119,7 @@ class DoctorController extends Controller
 
         $user->fill($data);
         $user->save();
+        $user->specialties()->sync($request->input('specialties'));
 
         $notification = 'La informacion del doctor ha sido actualizada correctamente';
         return redirect('/doctors')->with(compact('notification'));

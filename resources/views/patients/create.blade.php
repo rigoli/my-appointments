@@ -37,11 +37,11 @@
             </div>
             <div class="form-group">
                 <label for="cedula">Cedula</label>
-                <input type="cedula" name="cedula" id="cedula" class="form-control" value="{{ old('cedula') }}">
+                <input type="text" name="cedula" id="cedula" class="form-control" value="{{ old('cedula') }}">
             </div>
             <div class="form-group">
                 <label for="address">Address</label>
-                <input type="address" name="address" id="address" class="form-control" value="{{ old('address') }}">
+                <input type="text" name="address" id="address" class="form-control" value="{{ old('address') }}">
             </div>
             <div class="form-group">
                 <label for="phone">Phone Number</label>
